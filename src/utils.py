@@ -3,7 +3,7 @@ from src.data import DataloaderHandler
 import pickle
 from transformers import T5EncoderModel, T5Tokenizer, logging
 import os
-from meta import BASE_DIR
+from src.meta import BASE_DIR
 
 
 class ModelAttributes:
