@@ -18,7 +18,7 @@ else:
 
 
 def embed_esm2(embed_dataloader, out_file):
-    model, _ = pretrained.load_model_and_alphabet("facebook/esm2_t33_650M_UR50D")
+    model, _ = pretrained.load_model_and_alphabet("esm2_t33_650M_UR50D")
     model.eval().to(device)
     embed_h5 = h5py.File(out_file, "w")
     try:

@@ -18,7 +18,7 @@ EMBEDDINGS = {
     FAST2: {
         "embeds": BASE_DIR+"data_files/embeddings/esm2b_swissprot.h5",
         "config": "swissprot_esm2b.yaml",
-        "source_fasta": BASE_DIR+"data_files/deeploc_swissprot_clipped2k.fasta"
+        "source_fasta": BASE_DIR+"data_files/deeploc_swissprot_clipped1k.fasta"
     },
     MAMBA: {
         "embeds": BASE_DIR+"data_files/embeddings/prott5_swissprot.h5",
