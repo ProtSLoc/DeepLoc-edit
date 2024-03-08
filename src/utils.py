@@ -3,6 +3,9 @@ from src.data import DataloaderHandler
 import pickle
 from transformers import T5EncoderModel, T5Tokenizer, logging
 import os
+from meta import BASE_DIR
+
+
 class ModelAttributes:
     def __init__(self, 
                  model_type: str,
@@ -34,28 +37,57 @@ class ModelAttributes:
 
 def get_train_model_attributes(model_type):
     if model_type == FAST:
-        with open("models/ESM1b_alphabet.pkl", "rb") as f:
+        with open(BASE_DIR+"models/ESM1b_alphabet.pkl", "rb") as f:
             alphabet = pickle.load(f)
         return ModelAttributes(
             model_type,
             ESM1bFrozen,
             alphabet,
             EMBEDDINGS[FAST]["embeds"],
-            "models/models_esm1b",
-            "outputs/esm1b/",
+            BASE_DIR+"models/models_esm1b",
+            BASE_DIR+"outputs/esm1b/",
             1022,
             1280
         )
+    elif model_type == FAST2:
+        with open(BASE_DIR+"models/ESM2b_alphabet.pkl", "rb") as f:
+            alphabet = pickle.load(f)
+        return ModelAttributes(
+            model_type,
+            ESM2bFrozen,
+            alphabet,
+            EMBEDDINGS[FAST2]["embeds"],
+            BASE_DIR+"models/models_esm2b",
+            BASE_DIR+"outputs/esm2b/",
+            1022,
+            1280
+        )
+    elif model_type == MAMBA:
+        # alphabet = T5Tokenizer.from_pretrained(BASE_DIR+"Rostlab/prot_t5_xl_uniref50", do_lower_case=False )
+        
+        # return ModelAttributes(
+        #     model_type,
+        #     ProtT5Frozen,
+        #     alphabet,
+        #     EMBEDDINGS[MAMBA]["embeds"],            
+        #     BASE_DIR+"models/models_prott5",
+        #     BASE_DIR+"outputs/prott5/",
+        #     4000,
+        #     1024
+        # )
+        print("MAMBA model not implemented yet")
+        # TODO: Implement MAMBA model
+        pass 
     elif model_type == ACCURATE:
-        alphabet = T5Tokenizer.from_pretrained("Rostlab/prot_t5_xl_uniref50", do_lower_case=False )
+        alphabet = T5Tokenizer.from_pretrained(BASE_DIR+"Rostlab/prot_t5_xl_uniref50", do_lower_case=False )
         
         return ModelAttributes(
             model_type,
             ProtT5Frozen,
             alphabet,
             EMBEDDINGS[ACCURATE]["embeds"],            
-            "models/models_prott5",
-            "outputs/prott5/",
+            BASE_DIR+"models/models_prott5",
+            BASE_DIR+"outputs/prott5/",
             4000,
             1024
         )
